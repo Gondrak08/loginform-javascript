@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0 auto;
+        }
+        .container{
+            height:100vh;
+            width:auto;
+            display:flex;
+            align-items:center;
+            align-content:center;
+            justify-content:center;
+            background:rgb(226, 226, 226);
+        }
+
+        .container>div{
+            height: 30%;
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+            border-radius: 1em;
+
+        }
+        
+        .container>div>.title{
+            background-color: rgb(41, 101, 119);
+            color: white;
+            border-top-left-radius: 1em;
+            border-top-right-radius: 1em;
+        }
+        .container>div>.title>h3{
+            position: relative;
+            left: 1rem;
+        }
+
+        .container>div>form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+            width: 100%;
+    
+        }
+        .container>div>form>div{
+            display: flex;
+            flex-direction: column;
+        }
+        input, button, label{
+            width: 90%;
+            margin: 0 auto;
+        }
+        input{
+            height: 1.5em;
+            width: 90%;
+            border-width: 1px;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+        button{
+            height: 2.5em;
+        }
+        select{
+            width:60%;
+        }
+
+        #error{
+            position: relative;
+            left: 1em;
+            top: 1em;
+        }
+
+        @media(min-width:1440px){
+            .container>div{
+                width: 50%;
+        }
+        }
+        @media(min-width:1900px){
+            .container>div{
+                width: 25%;
+                height: 30%;
+            }
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <div class="title">
+                <h3>Faça o seu Login</h3>
+            </div>
+            <div id="error"></div>
+            <form id="form" action="/" method="GET">
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="off" required>
+                </div>
+                <div>
+                    <label for="password">Senha</label>
+                    <input id="password" name="password" type="password">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    //  define the variables
+    const email = document.getElementById('email');
+    const pass = document.getElementById('password');
+    const form = document.getElementById('form');
+    const err = document.getElementById('error');
+
+    //  avoiding the submitting of the form to refresh the page
+    form.addEventListener('submit', (e) => {
+        let message = [];
+        //catching erros
+        // if (name.value === '' || name.value == null) {
+        //     message.push('Name is required')
+        // }
+        if (pass.value.length <= 6) {
+            message.push('A senha precisa ser maior do que 6 caracteres');
+        }
+        if(pass.value ==='password' ){
+            message.push('a senha não pode ser password');
+        }
+
+        if (message.length > 0) {
+            e.preventDefault()  //this avoid the page of refreshing
+            err.innerText= message.join(',');
+        }
+    })
+
+</script>
+
+
+</html>
